@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE COMPANHIA LTDA</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --neon-blue: #00fff2;
+            --neon-pink: #ff00ff;
+            --neon-purple: #bc13fe;
+            --dark-bg: #0a001a;
+            --card-bg: rgba(11, 0, 38, 0.7);
+            --glass-effect: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(188, 19, 254, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 255, 242, 0.2) 0%, transparent 50%);
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                transparent 0px,
+                rgba(0, 255, 242, 0.03) 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, 
+                rgba(11, 0, 38, 0.9),
+                rgba(188, 19, 254, 0.3));
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+            text-shadow: 
+                0 0 10px var(--neon-blue),
+                0 0 20px var(--neon-purple),
+                0 0 40px var(--neon-pink);
+            animation: glowPulse 2s infinite;
+        }
+
+        .leader {
+            text-align: center;
+            color: var(--neon-pink);
+            font-family: 'Orbitron', sans-serif;
+            margin-top: 1rem;
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(11, 0, 38, 0.9);
+            padding: 1rem;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            border: 1px solid transparent;
+        }
+
+        nav a:hover {
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue);
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 242, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .card h2 {
+            color: var(--neon-blue);
+            margin-bottom: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 242, 0.5);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-bar {
+            background: rgba(0, 0, 0, 0.3);
+            height: 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Staff Section */
+        .staff-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .staff-member {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .staff-member:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.02);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 255, 242, 0.3);
+        }
+
+        .staff-member h3 {
+            color: var(--neon-pink);
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Rules Section */
+        .rules-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .rule-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .rule-item h3 {
+            color: var(--neon-pink);
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .rule-item ul {
+            list-style-position: inside;
+            margin-bottom: 1rem;
+        }
+
+        .warning-box {
+            background: linear-gradient(45deg, 
+                rgba(255, 0, 0, 0.1), 
+                rgba(255, 0, 0, 0.2));
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            color: #ff6b6b;
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+
+        /* Animations */
+        @keyframes glowPulse {
+            0% { text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-purple), 0 0 40px var(--neon-pink); }
+            50% { text-shadow: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-purple), 0 0 60px var(--neon-pink); }
+            100% { text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-purple), 0 0 40px var(--neon-pink); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo { font-size: 2rem; }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            .grid { grid-template-columns: 1fr; }
+            .card { margin: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">THE COMPANHIA LTDA</div>
+        <div class="leader">Líder: Hermes l grecco</div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#staff"><i class="fas fa-users"></i> Staff</a></li>
+            <li><a href="#info"><i class="fas fa-info-circle"></i> Informações</a></li>
+            <li><a href="#rules"><i class="fas fa-book"></i> Regras</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="warning-box">
+            AVISO IMPORTANTE: Ao entrar no servidor do Discord, você tem 3 dias para migrar para a guilda no jogo.
+            Após esse período, será expulso do servidor e precisará de nova avaliação para reentrar.
+        </div>
+
+        <div class="card" id="staff">
+            <h2><i class="fas fa-users"></i> Staff</h2>
+            <div class="staff-list">
+                <div class="staff-member">
+                    <h3>Hermes l grecco</h3>
+                    <p>Líder da Guilda</p>
+                </div>
+                <div class="staff-member">
+                    <h3>Nekryon</h3>
+                    <p>Assuntos Diplomáticos, Recrutador e Braço Direito</p>
+                </div>
+                <div class="staff-member">
+                    <h3>Mitriuz</h3>
+                    <p>Puxador de Conteúdo e Braço Direito</p>
+                </div>
+                <div class="staff-member">
+                    <h3>LuizIV</h3>
+                    <p>Assuntos de Recrutamento, Encarregado de Recrutamento</p>
+                </div>
+                <div class="staff-member">
+                    <h3>Wesley</h3>
+                    <p>Encarregado de Assuntos Internos, Responsável Interno e Recrutador</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" id="info">
+            <h2><i class="fas fa-info-circle"></i> Requisitos Mínimos</h2>
+            <div class="rule-item">
+                <h3>Requisitos para Temporada (65 dias)</h3>
+                <ul>
+                    <li>Fama de Coleta: Mínimo 1.5M</li>
+                    <li>Fama PVE: Mínimo 30M</li>
+                    <li>Fama de Fabricação: Mínimo 1M</li>
+                </ul>
+                <p><strong>Observação:</strong> O não cumprimento destes requisitos resultará em avaliação para permanência na guilda.</p>
+            </div>
+        </div>
+
+        <div class="card" id="rules">
+            <h2><i class="fas fa-book"></i> Regras e Sistemas</h2>
+            <div class="rules-list">
+                <div class="rule-item">
+                    <h3>1. Banco da Guilda</h3>
+                    <ul>
+                        <li>Manutenção de 2M de prata por jogador em caixa</li>
+                        <li>Retiradas: 21h - 23h via staff/financeiro</li>
+                        <li>Reguir instantâneo garantido para todos os players</li>
+                    </ul>
+                </div>
+
+                <div class="rule-item">
+                    <h3>2. Conteúdo PVE</h3>
+                    <ul>
+                        <li>Progressão: Royal → Red → Black</li>
+                        <li>Dungeons de grupo, fixas, baús avalon</li>
+                        <li>Mentoria opcional disponível</li>
+                    </ul>
+                </div>
+
+                <div class="rule-item">
+                    <h3>3. Coleta & Crafting</h3>
+                    <ul>
+                        <li>Suporte da guilda para coleta em zonas seguras</li>
+                        <li>Guilda compra materiais dos membros quando necessário</li>
+                        <li>Vendas posteriores em mercado de Caerleon</li>
+                    </ul>
+                </div>
+
+                <div class="rule-item">
+                    <h3>4. Sistema Top 5</h3>
+                    <ul>
+                        <li>1º Lugar: 3M Ou montaria de elite</li>
+                        <li>2º Lugar: 2M</li>
+                        <li>3º Lugar: 1M</li>
+                        <li>4º e 5º Lugar: 600k + Montaria de Elite</li>
+                    </ul>
+                </div>
+
+                <div class="rule-item">
+                    <h3>5. Taxa da Guilda</h3>
+                    <p>10% da prata do chão na temporada atual</p>
+                    <p>Reavaliação no fim da temporada</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
